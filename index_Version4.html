@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Internet Radio Station</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="main-bg"></div>
+  <div class="container">
+    <h1 class="logo neon">🎧 My Internet Radio Station</h1>
+    <p class="intro">Always-on streaming, powered by Radio.co and GitHub Pages!</p>
+    <div class="player-card glass">
+      <audio controls autoplay id="radio-player">
+        <!-- Replace with your real stream URL from Radio.co, Live365, Icecast, etc. -->
+        <source src="https://yourstreamurl.com/stream" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <p>
+        <a href="https://yourstreamurl.com/stream" target="_blank">Direct stream link</a>
+      </p>
+    </div>
+    <div class="schedule-card glass">
+      <h2 class="neon">📆 Schedule</h2>
+      <ul class="schedule-list">
+        <li><span class="show-time">08:00 - 10:00</span> <span class="show-name">Morning Vibes</span></li>
+        <li><span class="show-time">10:00 - 12:00</span> <span class="show-name">Chill Beats</span></li>
+        <li><span class="show-time">12:00 - 14:00</span> <span class="show-name">Live DJ Set</span></li>
+        <li><span class="show-time">14:00 - 17:00</span> <span class="show-name">Requests & Hits</span></li>
+        <li><span class="show-time">17:00 - 21:00</span> <span class="show-name">Evening Grooves</span></li>
+        <li><span class="show-time">21:00 - 08:00</span> <span class="show-name">Late Night Mix</span></li>
+      </ul>
+    </div>
+    <div class="chat-card glass">
+      <h2 class="neon">💬 Live Chat</h2>
+      <div id="chat-window">
+        <ul id="chat-messages"></ul>
+      </div>
+      <form id="chat-form">
+        <input type="text" id="chat-input" autocomplete="off" placeholder="Type a message..." maxlength="80" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+    <footer>
+      <p>
+        Powered by <a href="https://radio.co/" target="_blank">Radio.co</a> and <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+      </p>
+    </footer>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
