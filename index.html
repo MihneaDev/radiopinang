@@ -5,6 +5,7 @@
   <title>Radio Pinang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/socket.io@4.6.1/client-dist/socket.io.js"></script>
 </head>
 <body>
   <div class="main-bg"></div>
@@ -14,7 +15,8 @@
     <div class="player-card glass">
       <audio controls autoplay id="radio-player">
         <!-- Replace with your real stream URL from Radio.co, Live365, Icecast, etc. -->
-        <div data-type="newStreamPlayer" data-publicToken="bc898531-020e-4cb9-bb09-ce1b07f17013" data-theme="light" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div><script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+        <div data-type="newStreamPlayer" data-publicToken="bc898531-020e-4cb9-bb09-ce1b07f17013" data-theme="light" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed">
+        </div>
       </audio>
       <p>
         <a href="https://radiopinang.ismyradio.com" target="_blank">Direct stream link</a>
@@ -28,8 +30,14 @@
       </ul>
     </div>
     <div class="chat-card glass">
-      <h2 class="neon">💬 Live Chat</<script src="https://gist.github.com/ezesundayeze/7c7721f8996c07d080b83e5bcbd18500.js"></script>
-      </form>
+      <h2 class="neon">💬 Live Chat</h2>
+      <div id="chat-container">
+        <div id="messages"></div>
+        <form id="chat-form">
+          <input type="text" id="message-input" placeholder="Type a message..." required />
+          <button type="submit">Send</button>
+        </form>
+      </div>
     </div>
     <footer>
       <p>
@@ -37,5 +45,30 @@
       </p>
     </footer>
   </div>
+
+  <script>
+    // Replace 'YOUR_CHAT_SERVER_URL' with your actual chat server URL
+    const socket = io('YOUR_CHAT_SERVER_URL');
+
+    const messagesDiv = document.getElementById('messages');
+    const chatForm = document.getElementById('chat-form');
+    const messageInput = document.getElementById('message-input');
+
+    // Listen for incoming messages
+    socket.on('message', (message) => {
+      const messageElement = document.createElement('div');
+      messageElement.textContent = message;
+      messagesDiv.appendChild(messageElement);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the latest message
+    });
+
+    // Send a message
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = messageInput.value;
+      socket.emit('message', message); // Emit the message to the server
+      messageInput.value = ''; // Clear the input field
+    });
+  </script>
 </body>
 </html>
